@@ -1,0 +1,12 @@
+{
+    "server":"{{SS_SERVER_IP}}",
+    "server_port":{{SS_SERVER_PORT}},
+    "local_address":"{{SS_LOCAL_IP}}",
+    "local_port":{{SS_LOCAL_PORT}},
+    "password":"{{SS_PASSWORD}}",
+    "method":"{{SS_METHOD}}",
+    "auth":{{SS_AUTH}},
+    "mode":"{{SS_MODE}}",
+    "timeout":{{SS_TIMEOUT}},
+    "fast_open":{{SS_FAST_OPEN}}
+}

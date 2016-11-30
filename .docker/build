@@ -1,0 +1,50 @@
+#!/bin/bash
+set -x
+set -e
+
+build_shadowsocks(){
+    cd /
+    apk add --virtual build-dependencies git autoconf build-base libtool linux-headers openssl-dev file pcre-dev
+
+    SS_DIR=/usr/local/src/shadowsocks-libev
+    git clone --depth=1 -b $SS_RELEASE https://github.com/shadowsocks/shadowsocks-libev $SS_DIR
+    cd $SS_DIR
+    ./configure --disable-documentation
+    make -j `getconf _NPROCESSORS_ONLN`
+    strip src/ss-{server,local,manager,redir,tunnel}
+    install -m755 src/ss-server /usr/bin/
+    install -m755 src/ss-local /usr/bin/
+    install -m755 src/ss-manager /usr/bin/
+    install -m755 src/ss-redir /usr/bin/
+    install -m755 src/ss-tunnel /usr/bin/
+    cd /
+    rm -rf $SS_DIR
+}
+
+build_obfs4(){
+    cd /
+    apk add --virtual build-dependencies binutils git go
+
+    export GOPATH=/usr/local/go
+    mkdir -p $GOPATH
+
+    OBFS4_GIT=git.torproject.org/pluggable-transports/obfs4.git/obfs4proxy
+    OBFS4_BIN=/usr/local/bin/obfs4proxy
+    go get -d $OBFS4_GIT
+    cd $GOPATH/src/$OBFS4_GIT
+    git checkout obfs4proxy-$OBFS4_RELEASE
+    go build -o $OBFS4_BIN .
+    strip $OBFS4_BIN
+
+    rm -rf $GOPATH
+}
+
+apk update
+apk add pcre openssl iptables
+
+build_obfs4
+build_shadowsocks
+
+apk del --purge build-dependencies
+rm -rf /var/cache/apk/*
+

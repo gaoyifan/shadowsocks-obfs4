@@ -1,0 +1,15 @@
+ENABLE_UNSET_ENV_VARIBLES = false
+SS_RELEASE        = v2.5.6
+SS_SERVER_IP      = 127.0.0.1
+SS_SERVER_PORT    = 8388
+SS_LOCAL_IP       = 0.0.0.0
+SS_LOCAL_PORT     = 1080
+SS_PASSWORD       = barfoo!
+SS_TIMEOUT        = 60
+SS_METHOD         = aes-256-cfb
+SS_MODE           = tcp_and_udp
+SS_AUTH           = true
+SS_FAST_OPEN      = true
+OBFS4_RELEASE     = 0.0.7
+OBFS4_SERVER_IP   = 0.0.0.0
+OBFS4_SERVER_PORT = 1231
