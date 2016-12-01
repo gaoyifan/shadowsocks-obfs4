@@ -30,9 +30,8 @@ build_obfs4(){
 
     OBFS4_GIT=git.torproject.org/pluggable-transports/obfs4.git/obfs4proxy
     OBFS4_BIN=/usr/local/bin/obfs4proxy
-    go get -d $OBFS4_GIT
+    git clone https://github.com/madeye/obfs4-tunnel.git $GOPATH
     cd $GOPATH/src/$OBFS4_GIT
-    git checkout obfs4proxy-$OBFS4_RELEASE
     go build -o $OBFS4_BIN .
     strip $OBFS4_BIN
 
