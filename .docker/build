@@ -47,3 +47,4 @@ build_shadowsocks
 apk del --purge build-dependencies
 rm -rf /var/cache/apk/*
 
+mkdir -p $OBFS4_CONFIG_DIR
